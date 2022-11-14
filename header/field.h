@@ -13,7 +13,6 @@ class field
 {
 private:
     int x; //Sizes of the field
-    int y;
     int mines_qtt;
     place **mine_field; //Will be the field itself
 
@@ -22,7 +21,7 @@ private:
     void calculate_neighbors(); //Calculate the neighboors values
     int test_place(int xx, int yy);
 public:    
-    field(int x, int y, int mines_qtt);
+    field(int x, int mines_qtt);
     ~field(); //Important to dealocate the field after
 };
 
