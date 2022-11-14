@@ -8,11 +8,13 @@
 class engine
 {
 private:
-    player ply;
-    field mine_field;
+    player *ply;
+    field *field_game;
 public:
-    engine(/* args */);
+    engine(int qtt_mines, int size);
     ~engine();
+    void begin_game();
+    void present_field_values();
 };
 
 #endif

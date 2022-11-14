@@ -5,6 +5,8 @@ field::field(int x, int mines_qtt)
 {
     this->x = x;
     this->mines_qtt = mines_qtt;
+
+    generate_field();
 }
 
 field::~field()
@@ -30,6 +32,7 @@ void field::generate_field()
     }
 
     place_mines();
+    //calculate_neighbors();
 }
 
 //Function that places the mines in the field
@@ -46,8 +49,13 @@ void field::place_mines()
         xx = rand()%x;
         yy = rand()%x;
 
-        mine_field[xx][yy].value = -1; //-1 for mines
-        count_mines++;
+        if(mine_field[xx][yy].value != -1)
+        {
+            mine_field[xx][yy].value = -1; //-1 for mines
+            count_mines++;
+        }
+        else
+            continue;
     }
 } 
 
@@ -96,9 +104,19 @@ void field::calculate_neighbors()
 } 
 
 int field::test_place(int xx, int yy)
-{
+{   
     if(mine_field[xx][yy].value == 1)
         return -1;
     else
         return 1;
+}
+
+void field::mark_place(int xx, int yy)
+{
+    mine_field[xx][yy].marked = true;
+}
+
+int field::getSize()
+{
+    return x;
 }

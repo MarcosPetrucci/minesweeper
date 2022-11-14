@@ -7,13 +7,13 @@ OBJ = *.cpp source/*.cpp
 all: $(OBJ)
 	@$(CC) -o prog $^ $(CFLAGS) $(LIBS)
 
-o: %.c $(DEPS)
+o: $(OBJ) $(DEPS)
 	@$(CC) -c -o $@ $< $(CFLAGS)
 
 run:
 	@read -p "Insert the size of the field: "  SIZE; \
 	read -p "Insert the quantity of mines: " QTT;\
-	./prog $${NOME} $${QTT};
+	./prog $${SIZE} $${QTT};
 
 clean:
 	@rm -f *.o prog
