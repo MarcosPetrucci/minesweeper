@@ -1,5 +1,6 @@
 #include "header/field.h"
 #include <stdlib.h>
+#include <iostream>
 
 field::field(int x, int mines_qtt)
 {
@@ -32,7 +33,7 @@ void field::generate_field()
     }
 
     place_mines();
-    //calculate_neighbors();
+    calculate_neighbors();
 }
 
 //Function that places the mines in the field
@@ -78,22 +79,41 @@ void field::calculate_neighbors()
             else
             {
                 //We have to garantee that the neighboor is a mine and is acessible
-                if(mine_field[i-1][j-1].value == -1 && i > 0 && j > 0)
-                    mine_field[i][j].value += mine_field[i-1][j-1].value;
-                if(mine_field[i-1][j].value == -1 && i > 0)
-                    mine_field[i][j].value += mine_field[i-1][j].value;
-                if(mine_field[i-1][j+1].value == -1 && i > 0 && j < x-1 )
-                    mine_field[i][j].value += mine_field[i-1][j+1].value;
-                if(mine_field[i][j-1].value == -1 && j > 0)
-                    mine_field[i][j].value += mine_field[i][j-1].value;
-                if(mine_field[i][j+1].value == -1 && j < x-1)
-                    mine_field[i][j].value += mine_field[i][j+1].value;
-                if(mine_field[i+1][j-1].value == -1 && i < x-1 && j > 0)
-                    mine_field[i][j].value += mine_field[i+1][j-1].value;
-                if(mine_field[i+1][j].value == -1 && i < x-1)
-                    mine_field[i][j].value += mine_field[i+1][j].value;
-                if(mine_field[i+1][j+1].value == -1 && i < x-1 && j < x + 1)
-                    mine_field[i][j].value += mine_field[i+1][j+1].value;
+                //Important, have to test the possible index before acessing it...
+                if(i > 0 && j > 0)
+                    if(mine_field[i-1][j-1].value == -1)
+                        mine_field[i][j].value += mine_field[i-1][j-1].value;
+                
+                if(i > 0)
+                    if(mine_field[i-1][j].value == -1)
+                        mine_field[i][j].value += mine_field[i-1][j].value;
+
+                if(i > 0 && j < x-1)
+                    if(mine_field[i-1][j+1].value == -1)
+                        mine_field[i][j].value += mine_field[i-1][j+1].value;
+
+                if(j > 0)
+                    if(mine_field[i][j-1].value == -1)
+                        mine_field[i][j].value += mine_field[i][j-1].value;
+            
+                if(j < x-1)
+                    if(mine_field[i][j+1].value == -1)
+                        mine_field[i][j].value += mine_field[i][j+1].value;
+        
+                if(i < x-1 && j > 0)
+                    if(mine_field[i+1][j-1].value == -1 )
+                        mine_field[i][j].value += mine_field[i+1][j-1].value;
+
+                if(i < x-1)
+                    if(mine_field[i+1][j].value == -1)
+                        mine_field[i][j].value += mine_field[i+1][j].value;
+                
+                if(i < x-1 && j < x + 1)
+                    if(mine_field[i+1][j+1].value == -1)
+                        mine_field[i][j].value += mine_field[i+1][j+1].value;
+                
+                //Invert the value to the true one!
+                mine_field[i][j].value *= -1;
             }
             
                 /*mine_field[i][j].value = mine_field[i-1][j-1].value + mine_field[i-1][j].value + mine_field[i-1][j+1].value +
@@ -119,4 +139,20 @@ void field::mark_place(int xx, int yy)
 int field::getSize()
 {
     return x;
+}
+
+void field::present_field()
+{
+    int i, j;
+    for(i = 0; i < x; i++)
+    {
+        for(j = 0; j < x; j++)
+        {
+            if(mine_field[i][j].value >= 0)
+                std::cout << " " << mine_field[i][j].value << " " ;
+            else
+                std::cout << mine_field[i][j].value << " " ;
+        }
+        std::cout << "\n";
+    }
 }

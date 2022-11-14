@@ -1,5 +1,4 @@
 CC=g++					# C compiler
-
 CFLAGS=-I. -g -Wall
 DEPS= header/*.h	
 OBJ = *.cpp source/*.cpp

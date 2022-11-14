@@ -13,15 +13,7 @@ engine::~engine()
     delete field_game;
 }
 
-void engine::present_field_values()
+void engine::present()
 {
-    int i, j;
-    for(i = 0; i < field_game->getSize(); i++)
-    {
-        for(j = 0; j < field_game->getSize(); j++)
-        {
-            std::cout << field_game->mine_field[i][j].value << " " ;
-        }
-        std::cout << "\n";
-    }
+    field_game->present_field();
 }

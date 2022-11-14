@@ -14,7 +14,7 @@ public:
     engine(int qtt_mines, int size);
     ~engine();
     void begin_game();
-    void present_field_values();
+    void present();
 };
 
 #endif
