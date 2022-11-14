@@ -17,4 +17,6 @@ int main(int argv, char **argc)
     engine *game = new engine(qtt_mines, size);   
 
     game->present();
+
+    return 0;
 }
