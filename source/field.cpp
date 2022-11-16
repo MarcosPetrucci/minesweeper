@@ -123,6 +123,7 @@ void field::calculate_neighbors()
     }
 } 
 
+//Test if a place is either a mine or a regular place
 int field::test_place(int xx, int yy)
 {   
     if(mine_field[xx][yy].value == 1)
@@ -131,16 +132,19 @@ int field::test_place(int xx, int yy)
         return 1;
 }
 
+//Player marked the place as a mine
 void field::mark_place(int xx, int yy)
 {
     mine_field[xx][yy].marked = true;
 }
 
+//Return the size of the field
 int field::getSize()
 {
     return x;
 }
 
+//Dev function
 void field::present_field()
 {
     int i, j;

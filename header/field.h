@@ -21,7 +21,7 @@ private:
     int x; //Sizes of the field
     int mines_qtt;
     
-    void generate_field();
+    void generate_field(); //Generate all the field, with mines quantities and proximity
     void place_mines(); //Function that places the mines in the field
     void calculate_neighbors(); //Calculate the neighboors values
     Place **mine_field; //Will be the field itself
@@ -29,9 +29,9 @@ private:
 public:    
     field(int x, int mines_qtt);
     ~field(); //Important to dealocate the field after
-    int test_place(int xx, int yy);
-    void mark_place(int xx, int yy);
-    int getSize();
+    int test_place(int xx, int yy); //Test if a place is either a mine or a regular place
+    void mark_place(int xx, int yy); //Player marked the place as a mine
+    int getSize();  //Return the size of the field
     void present_field(); //Dev function
 
 };

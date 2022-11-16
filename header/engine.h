@@ -13,7 +13,8 @@ private:
 public:
     engine(int qtt_mines, int size);
     ~engine();
-    void begin_game();
+    //void begin_game();
+    //Present the field with all the values (obviously is a dev function)
     void present();
 };
 
