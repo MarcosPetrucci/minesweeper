@@ -15,7 +15,6 @@ int main(int argv, char **argc)
 
     //Initialize the game
     engine *game = new engine(qtt_mines, size);   
-
     game->present();
 
     return 0;
